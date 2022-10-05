@@ -125,9 +125,23 @@ int CompararAlunos(Aluno* a, Aluno* b) {
 
 // Função de Ordenação de Alunos.
 void OrdenarAlunos(Aluno* alunos, int n) {
-    // Ordenamos usando quick sort a função de comparação
-    // de alunos que criamos anteriormente.
-    qsort(alunos, n, sizeof(Aluno), CompararAlunos);
+    // Primeiro Loop de Ordenação, percorrendo a lista inteira (se n estiver certo)
+    for (int i = 0; i < n; i++) {
+        // Percorremos o resto da lista com esse n.
+        for (int j = i + 1; j < n; j++) {
+            // Se o aluno na posição i comparado com o do j for menor ou igual a 0,
+            // não fazemos nada.
+            if (CompararAlunos(&alunos[i], &alunos[j]) <= 0)
+                continue;
+            
+            // Copiamos um aluno para uma variável temporária.
+            Aluno tmp = alunos[i];
+
+            // Invertemos os alunos.
+            alunos[i] = alunos[j];
+            alunos[j] = tmp;
+        }
+    }
 }
 
 // Função Main.
